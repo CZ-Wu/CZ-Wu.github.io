@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Grasp Proposal Networks: An End-to-End Solution for Visual Learning of Robotic Grasps">
+    <meta name="author" content="Chaozheng Wu, Jian Chen, Qiaoyu Cao, Jianchi Zhang, Yunxin Tai, Lin Sun, Kui Jia">
+
+    <title>Grasp Proposal Networks: An End-to-End Solution for Visual Learning of Robotic Grasps</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" 
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+<!--    <link rel="icon" href="img/favicon.gif" type="image/gif">-->
+</head>
+
+<body>
+<div class="container">
+
+    <div class="jumbotron">
+	    <h2>Grasp Proposal Networks: An End-to-End Solution for Visual Learning of Robotic Grasps</h2>
+	    <h2>NeurIPS 2020</h2>
+        <p class="abstract">An end-to-end robotic grasp poses estimation network.</p>
+        <p iclass="authors">
+            <a href="https://wuchaozheng.com.cn/">Chaozheng Wu</a>,
+            <a>Jian Chen</a>,
+            <a>Qiaoyu Cao</a>,
+            <a>Jianchi Zhang</a>,
+            <a>Yunxin Tai</a>,
+            <a>Lin Sun</a>,
+            <a href="http://kuijia.site/">Kui Jia</a>
+        </p>
+
+        <p>
+            <a class="btn btn-primary" href="https://proceedings.neurips.cc/paper/2020/file/994d1cad9132e48c993d58b492f71fc1-Paper.pdf">Paper</a>
+            <a class="btn btn-primary" href="https://github.com/CZ-Wu/GPNet">Code</a>
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1hZmQhuTrKRn8BMyAq-bI13rQSrdGQdJH/view?usp=sharing">Datasets</a>
+    </div>
+
+    <h2>Paper Video</h2>
+    <hr>
+    <iframe width="884" height="497" class='center' src="https://www.youtube.com/embed/X59u_5GQXm4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <hr>
+    <p>
+        Learning robotic grasps from visual observations is a promising yet challenging
+        task. Recent research shows its great potential by preparing and learning from
+        large-scale synthetic datasets. For the popular, 6 degree-of-freedom (6-DOF)
+        grasp setting of parallel-jaw gripper, most of existing methods take the strategy of
+        heuristically sampling grasp candidates and then evaluating them using learned
+        scoring functions. This strategy is limited in terms of the conflict between sampling
+        efficiency and coverage of optimal grasps. To this end, we propose in this work
+        a novel, end-to-end Grasp Proposal Network (GPNet), to predict a diverse set of
+        6-DOF grasps for an unseen object observed from a single and unknown camera
+        view. GPNet builds on a key design of grasp proposal module that defines anchors
+        of grasp centers at discrete but regular 3D grid corners, which is flexible to support
+        either more precise or more diverse grasp predictions. To test GPNet, we contribute
+        a synthetic dataset of 6-DOF object grasps; evaluation is conducted using rule-based
+        criteria, simulation test, and real test. Comparative results show the advantage of
+        our methods over existing ones. Notably, GPNet gains better simulation results via
+        the specified coverage, which helps achieve a ready translation in real test.
+    </p>
+
+    <div class="section">
+        <h2>Architecture Overview</h2>
+        <hr>
+        <div class="image">
+            <img src="../images/GPNet.png" style="width:100%; margin-right:-20px; margin-top:-10px;">
+        </div>
+        <p>
+            Overview of our GPNet architecture. Given a point cloud $\mathcal{I}$ of partial object surface with $n$ 
+            points. GPNet uses a backbone network of PointNet$++$ to extract point-wise features. In the Grasp Proposal 
+            module, $m = r^3$ anchors $\{\tilde{\rm x}_j\}_{j=1}^{m} $ of grasp centers are defined at a discrete set of 
+            regular 3D grid. For each ${\rm p}_i$ in $\mathcal{I}$, we connect it with all anchors and get a set of grasp 
+            proposals $\mathcal{G}_i = \{({\rm p}_i, \tilde{\rm x}_j)\}_{j=1}^{m}$, resulting in a number of $n \times m$ 
+            grasp proposals in total. In this work, two physically sensible schemes are designed to prune most of the $n 
+            \times m$ grasp proposals to a number of $n' \times m'$. With these grasp proposals, we gather the features 
+            from PointNet++ associated with the anchor coordinates to predict a diverse set of precise grasps using three 
+            headers, which are trained to respectively specify antipodal validity, regress grasp prediction, and score 
+            grasp confidence.
+        </p>
+
+
+    <div class="section">
+        <h2>Paper</h2>
+        <hr>
+        <div>
+            <div class="list-group">
+                <a href="https://proceedings.neurips.cc/paper/2020/file/994d1cad9132e48c993d58b492f71fc1-Paper.pdf" class="list-group-item">
+                    <img src="images/gpnet_paper.png" style="width:100%; margin-right:-20px; margin-top:-10px;">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <h2>Bibtex</h2>
+    <hr>
+    <div class="bibtexsection">
+        @inproceedings{WuChenNeurIPS20,
+            title={Grasp Proposal Networks: An End-to-End Solution for Visual Learning of Robotic Grasps},
+            author={Chaozheng Wu and Jian Chen and Qiaoyu Cao and Jianchi Zhang 
+                    and Yunxin Tai and Lin Sun and Kui Jia},
+            booktitle={Proceedings of the Neural Information Processing Systems (NeurIPS)},
+            year={2020}
+          }
+    </div>
+
+
+    <hr>
+    <footer>
+        <p>Send feedback and questions to <a href="https://wuchaozheng.com.cn/">Chaozheng Wu</a></p>
+        <p>Thanks to Volodymyr Kuleshov for his website template. &copy; 2017</p>
+    </footer>
+
+</div><!--/.container-->
+</body>
+</html>
